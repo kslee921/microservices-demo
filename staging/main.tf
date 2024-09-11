@@ -66,6 +66,9 @@ resource "aws_instance" "k8s-node" {
     command = "ssh -i ${var.private_key_file} -o StrictHostKeyChecking=no ubuntu@${self.private_ip} sudo `cat join.cmd`"
   }
 
+  metadata_options {
+    http_tokens = "required"
+  }
 }
 
 resource "aws_instance" "k8s-master" {
